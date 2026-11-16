@@ -46,7 +46,7 @@ The 2026-10-30 reconciliation adds 20 Sunlu PETG 2.0 variants and support for pe
 
 ## Current snapshot
 
-* **Published records**: 51,767
+* **Published records**: 51,795
 
 <!-- readme-snapshot:start -->
 | Source | Count |
@@ -54,8 +54,8 @@ The 2026-10-30 reconciliation adds 20 Sunlu PETG 2.0 variants and support for pe
 | Manufacturer source files | 492 |
 | Material definitions | 155 |
 | Source filament objects | 12,339 |
-| Color entries | 35,200 |
-| Compiled filament variants | 51,767 |
+| Color entries | 35,228 |
+| Compiled filament variants | 51,795 |
 | Source filaments with country of origin | 9,714 |
 | Source filaments with TDS/product links | 5,695 |
 | Source filaments with SDS links | 1,851 |
