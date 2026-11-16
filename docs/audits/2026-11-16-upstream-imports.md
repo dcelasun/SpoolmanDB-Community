@@ -42,9 +42,11 @@ Results:
 | #516 RatRig field fix | **No change** | 0 | Community already has the corrected `spool_type`, with the same IDs. |
 | #507 ELEGOO Marble colours | **No change (conflict)** | 0 | Both colours exist. The Community hexes came from the Open Filament Database, the upstream hexes from 3dfilamentprofiles. Neither is a manufacturer source, so the Community values are kept. |
 | #502 Das Filament | **No change** | 0 | Matches the [2026-11-07 decision](2026-11-07-release-catalog.md#das-filament--partial-safe-addition): the Community 1 kg variants and the TPU V2 Flexibel line already cover this. The upstream tare of 214 g has no measurement evidence and does not identify the spool type. |
-| #509, #514, #519–#524, #536 and open #515, #517, #518, #525–#527 | **Deferred** | — | Name and material cleanups that change IDs, file reformatting, linter and docs. These wait for the rename-retirement process (Icezaza2543/SpoolmanDB-Community#72). Any field fixes inside them that leave IDs unchanged will be handled with those PRs. |
+| #509, #514, #519–#524, #536 and open #515, #517, #518, #525–#527 | **Deferred** | — | Name and material cleanups that change IDs, file reformatting, linter and docs. These wait for the rename-retirement process (Icezaza2543/SpoolmanDB-Community#72). Checked for field fixes that leave IDs unchanged (density, temperatures, hex, tare, finish and similar): none apply. The only one, Inland Silk Grey in #525, has no Community counterpart; the Community `Silk PLA Gray` is a different record with its own values. |
 
 ## Follow-ups
+
+- Some cleanups are restructures, not plain renames: #522 (eSun) moves words between colour names and templates (`PLA-Luminous {color_name}` + `Cored Luminous Orange` → `Cored Luminous {color_name}` + `Orange`), and #524 (Professional LAB) splits groups. The rename-retirement rule rejects colour-name changes, so these need a reviewed line/colour binding before they can be migrated.
 
 - The other Polymaker Panchroma Matte groups (`Army/Muted/Pastel Panchroma Matte PLA`) still carry the older hexes. Aligning them needs a separate review.
 - Bambu PLA Palette and TPU-75A are missing tare and spool type until a measurement or manufacturer source is found.
