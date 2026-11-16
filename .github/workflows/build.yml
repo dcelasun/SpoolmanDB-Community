@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - main
+      # Fork-only preview: deploys this branch to GitHub Pages for testing in Spoolman.
+      # Never send this branch or this line upstream.
+      - pages-preview
   pull_request:
     branches:
       - main
