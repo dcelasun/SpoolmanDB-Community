@@ -44,9 +44,28 @@ Results:
 | #502 Das Filament | **No change** | 0 | Matches the [2026-11-07 decision](2026-11-07-release-catalog.md#das-filament--partial-safe-addition): the Community 1 kg variants and the TPU V2 Flexibel line already cover this. The upstream tare of 214 g has no measurement evidence and does not identify the spool type. |
 | #509, #514, #519–#524, #536 and open #515, #517, #518, #525–#527 | **Deferred** | — | Name and material cleanups that change IDs, file reformatting, linter and docs. These wait for the rename-retirement process (Icezaza2543/SpoolmanDB-Community#72). Checked for field fixes that leave IDs unchanged (density, temperatures, hex, tare, finish and similar): none apply. The only one, Inland Silk Grey in #525, has no Community counterpart; the Community `Silk PLA Gray` is a different record with its own values. |
 
+## Upstream merges reviewed on 2026-11-18
+
+Upstream `main` moved from `3cf89fbb` to `8e391c16be4bfde29dfc184e2f0b9a8d154ab550` (2026-11-18). That range merged the cleanup PRs deferred above, plus two data PRs. Nothing here is applied in this PR. The rename counts come from dry runs of `scripts/rename_migration.py --upstream <merge>^1 <merge>` against Community data, using the tooling proposed in Icezaza2543/SpoolmanDB-Community#73. Nothing was written.
+
+| Upstream PR (merge) | Decision | Notes |
+|---|---|---|
+| #527 various brands (`772db673`) | **Deferred: rename + reclassify** | Same-material renames that match Community: 13 files, 740 IDs. The files are ambrosia, cr3d, creality, elegoo, flashforge, formfutura, NTHGrillon, printedsolid, prusament, qiditech, rosa3d, soleyin and sunlu. 8 groups change material (cc3d, gst3d, kexcelled, qiditech, tecbears, teqstone, tinmorry, xzn; e.g. `TPU` → `TPU-95A`) and wait for the reclassify process. r3d and smartfil: no Community group has the upstream template name, so they need a manual mapping. |
+| #518 Polymaker (`e86be9f1`) | **Deferred: rename + reclassify** | 9 groups / 858 IDs rename cleanly. 9 groups change material (Fiberon PA grades, PolyFlex TPU hardness). Run after this PR, which also edits `polymaker.json`. |
+| #526 Overture (`641226c7`) | **Deferred: rename + reclassify** | 57 groups / 93 IDs rename cleanly, and existing retirements pointing at renamed IDs are re-pointed. 1 group (`High Speed 95A`, TPU → TPU-95A) changes material. |
+| #515 AzureFilm (`f320e26d`) | **Deferred: reclassify** | All 5 changed groups also change material (`TPU` → `TPU-85A`/`TPU-98A`, `CF` → `PETG-CF`/`PA-CF`, `PC` → `PC+ABS`). |
+| #525 Inland (`df5d1400`) | **Deferred: needs binding** | Moves `Silk` from colour names into the template (`Silk Grey` → `Grey`), like #522 and #524. Drops Inland Silk Grey `BBC6CE`, which has no Community counterpart (see above). |
+| #536 eSun formatting | **No change** | Whitespace only at the end of `esun.json`, merged together with #518. |
+| #532 Overture Easy (`8e391c16`) | **No change** | Merged unchanged from the head reviewed above. All 28 records already exist as Community `PLA Easy` / `PLA Easy Glow`. |
+| #528 ELEGOO PAHT-CF (`7ff6b0f`) | **No change** | Icezaza's upstream PR for the measured 169 g cardboard tare (see `docs/evidence/elegoo/paht-cf-2026-11-12/`). Community already has it. |
+| #530 NOVTAU update (`bb7a5ab`) | **Follow-up** | Updates the NOVTAU file imported above from #508. Compiled against the #508 version it adds 306 IDs, removes 36 and changes 155 records (113 hex, 35 extruder temperature, 30 multi-colour hexes). The removed IDs include `PETG High-Flow`, Matte, Marble, Silk+ and Wood colours. NOVTAU is not on Community `main` yet, so its 243 IDs have never been released. Re-importing the #530 file here instead would need no retirements. |
+
+Upstream PRs still open by the same author: #512 Voxelab and #531 Giantarm (both partially applied above), and #517 (spool_weight lint warning; tooling, not data).
+
 ## Follow-ups
 
 - Some cleanups are restructures, not plain renames: #522 (eSun) moves words between colour names and templates (`PLA-Luminous {color_name}` + `Cored Luminous Orange` → `Cored Luminous {color_name}` + `Orange`), and #524 (Professional LAB) splits groups. The rename-retirement rule rejects colour-name changes, so these need a reviewed line/colour binding before they can be migrated.
 
 - The other Polymaker Panchroma Matte groups (`Army/Muted/Pastel Panchroma Matte PLA`) still carry the older hexes. Aligning them needs a separate review.
 - Bambu PLA Palette and TPU-75A are missing tare and spool type until a measurement or manufacturer source is found.
+- Re-import NOVTAU from upstream #530 before this PR merges (see the 2026-11-18 table), or record why it is kept at #508.
