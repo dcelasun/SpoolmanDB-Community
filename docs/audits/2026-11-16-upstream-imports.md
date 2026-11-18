@@ -15,7 +15,7 @@ Results:
 
 | Check | Result |
 |---|---|
-| New public IDs | 431 |
+| New public IDs | 701 (431 before NOVTAU was re-imported from #530; see the 2026-11-18 table) |
 | Changed, rekeyed or removed historical IDs | 0 |
 | Duplicate candidates | 0 unresolved (the 1 existing candidate is a reviewed non-duplicate) |
 | `validate.py --strict` | Pass |
@@ -34,7 +34,7 @@ Results:
 | #503 Polymaker Panchroma | **Partially applied** | 1 | Panchroma Matte: 37 hexes updated to the manufacturer's published values ([source](https://shop.polymaker.com/en-eu/products/matte-pla)). Electric Magenta added as a **refill-only** group (`is_refill: true`) because it is published only on the refill variant. The removal of "Formerly …" from names is deferred to the rename process. Dual Matte colours and hexes were already in Community. |
 | #504 Numakers PLA+ | **Partially applied** | 8 | 32 hexes updated (the Community values were the old upstream values). Eight missing colours added. Spelling renames (Flourescent → Fluorescent, Lavendar → Lavender, Grey → Gray, Fuscia/Magenta → Magenta, Cool (Lithophane) White → Cool White) are deferred to the rename process. |
 | #529 Bambu Lab PLA Palette, TPU-75A | **Applied, tare left out** | 15 | Both products confirmed as current Bambu products: the PLA Palette CMYKW five-spool kit, and TPU 75A at 2.85 mm for the H3C. See [3DJake TPU 75A](https://www.3djake.com/bambu-lab/tpu-75a-pink) and [ALL3DP](https://all3dp.com/4/bambu-labs-new-tpu-75a-is-ultra-soft-prints-fast-brings-back-2-85-mm-filament/). The PR's 250 g tare and spool type have no source, so they are left out. Note that adding a spool type later will change these IDs (`_n` suffix). New material `TPU-75A` (density 1.17) added to `materials.json`. |
-| #508 NOVTAU | **Applied** | 243 | New manufacturer file, copied as-is. Data comes from the manufacturer's own product pages and in-house measurements, per the PR. |
+| #508 NOVTAU | **Applied, then superseded by #530** | 243 → 513 | New manufacturer file, copied as-is. Data comes from the manufacturer's own product pages and in-house measurements, per the PR. Replaced on 2026-11-18 by the #530 version (see below). |
 | #512 Voxelab (open) | **Partially applied** | 28 | Colours missing from the existing Community `High Speed` PLA+ and PLA groups were added to those groups. Upstream lists Abyssal Red under PLA with a different hex, while Community lists it under PLA+, so that colour is left out as a conflict. PLA+, PETG-CF and ASA-CF were already present. Source: Amazon listings in the PR. |
 | #531 Giantarm (open) | **Applied** | 80 | Fourteen colours added to the existing `Giantarm PLA` group. The Red placeholder `FF0000` was replaced with the listed `C41D26`. New Silk PLA, PETG and TPU-95A groups use upstream naming. No tare information is available. Source: Amazon listings in the PR. |
 | #532 Overture Easy (open) | **No change** | 0 | All 28 records already exist as Community `PLA Easy` / `PLA Easy Glow`. |
@@ -46,7 +46,7 @@ Results:
 
 ## Upstream merges reviewed on 2026-11-18
 
-Upstream `main` moved from `3cf89fbb` to `8e391c16be4bfde29dfc184e2f0b9a8d154ab550` (2026-11-18). That range merged the cleanup PRs deferred above, plus two data PRs. Nothing here is applied in this PR. The rename counts come from dry runs of `scripts/rename_migration.py --upstream <merge>^1 <merge>` against Community data, using the tooling proposed in Icezaza2543/SpoolmanDB-Community#73. Nothing was written.
+Upstream `main` moved from `3cf89fbb` to `8e391c16be4bfde29dfc184e2f0b9a8d154ab550` (2026-11-18). That range merged the cleanup PRs deferred above, plus two data PRs. Only #530 (NOVTAU) is applied in this PR. The rename counts come from dry runs of `scripts/rename_migration.py --upstream <merge>^1 <merge>` against Community data, using the tooling proposed in Icezaza2543/SpoolmanDB-Community#73. Nothing was written.
 
 | Upstream PR (merge) | Decision | Notes |
 |---|---|---|
@@ -58,7 +58,7 @@ Upstream `main` moved from `3cf89fbb` to `8e391c16be4bfde29dfc184e2f0b9a8d154ab5
 | #536 eSun formatting | **No change** | Whitespace only at the end of `esun.json`, merged together with #518. |
 | #532 Overture Easy (`8e391c16`) | **No change** | Merged unchanged from the head reviewed above. All 28 records already exist as Community `PLA Easy` / `PLA Easy Glow`. |
 | #528 ELEGOO PAHT-CF (`7ff6b0f`) | **No change** | Icezaza's upstream PR for the measured 169 g cardboard tare (see `docs/evidence/elegoo/paht-cf-2026-11-12/`). Community already has it. |
-| #530 NOVTAU update (`bb7a5ab`) | **Follow-up** | Updates the NOVTAU file imported above from #508. Compiled against the #508 version it adds 306 IDs, removes 36 and changes 155 records (113 hex, 35 extruder temperature, 30 multi-colour hexes). The removed IDs include `PETG High-Flow`, Matte, Marble, Silk+ and Wood colours. NOVTAU is not on Community `main` yet, so its 243 IDs have never been released. Re-importing the #530 file here instead would need no retirements. |
+| #530 NOVTAU update (`bb7a5ab`) | **Applied** | `filaments/novtau.json` replaced with the #530 version (reformatted to 2-space indentation, data unchanged). Compared with the #508 version this adds 306 IDs, drops 36 and changes 155 records (113 hex, 35 extruder temperature, 30 multi-colour hexes). The dropped IDs include `PETG High-Flow`, Matte, Marble, Silk+ and Wood colours. NOVTAU was never on Community `main`, so no released ID is removed and no retirement is needed. NOVTAU now has 513 IDs. |
 
 Upstream PRs still open by the same author: #512 Voxelab and #531 Giantarm (both partially applied above), and #517 (spool_weight lint warning; tooling, not data).
 
@@ -68,4 +68,3 @@ Upstream PRs still open by the same author: #512 Voxelab and #531 Giantarm (both
 
 - The other Polymaker Panchroma Matte groups (`Army/Muted/Pastel Panchroma Matte PLA`) still carry the older hexes. Aligning them needs a separate review.
 - Bambu PLA Palette and TPU-75A are missing tare and spool type until a measurement or manufacturer source is found.
-- Re-import NOVTAU from upstream #530 before this PR merges (see the 2026-11-18 table), or record why it is kept at #508.
