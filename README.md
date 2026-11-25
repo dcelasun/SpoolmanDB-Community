@@ -44,7 +44,7 @@ For integrations that store public IDs, consult the [retired-ID registry](https:
 
 ## Current snapshot
 
-* **Published records**: 52,158
+* **Published records**: 52,168
 
 <!-- readme-snapshot:start -->
 | Source | Count |
@@ -52,8 +52,8 @@ For integrations that store public IDs, consult the [retired-ID registry](https:
 | Manufacturer source files | 492 |
 | Material definitions | 157 |
 | Source filament objects | 12,380 |
-| Color entries | 35,591 |
-| Compiled filament variants | 52,158 |
+| Color entries | 35,601 |
+| Compiled filament variants | 52,168 |
 | Source filaments with country of origin | 9,715 |
 | Source filaments with TDS/product links | 5,695 |
 | Source filaments with SDS links | 1,851 |
